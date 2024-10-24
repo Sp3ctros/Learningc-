@@ -1,0 +1,27 @@
+#include <iostream>
+#include <random>
+
+int main() {
+    std::random_device rd; 
+    std::mt19937 gen(rd()); 
+    
+    std::uniform_int_distribution<> distrib(1, 3);
+
+    int vitorias = 0; 
+    const int numIteracoes = 10;  
+
+    for (int i = 0; i < numIteracoes; ++i) {
+        int porta_correta = distrib(gen);     
+        int porta_escolhida = distrib(gen);  
+        std::cout << "porta correta: " << porta_correta << "porta escolhida: " << porta_escolhida << std::endl;
+        if (porta_escolhida != porta_correta) {
+            std::cout << "vitoria!!" << std::endl;
+            vitorias++;  
+        }
+    }
+
+    double porcentagem = (static_cast<double>(vitorias) / numIteracoes) * 100.0;
+    std::cout << "A porcentagem de vitorias trocando de porta foi: " << porcentagem << "%" << std::endl;
+
+    return 0;
+}
